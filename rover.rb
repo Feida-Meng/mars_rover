@@ -20,6 +20,7 @@ class Rover
     puts "Please enter the moves."
     @moves = gets
     puts @moves.length
+    puts @moves[@moves.length]
 
     l = 0
     while l < @moves.length-1
@@ -54,34 +55,15 @@ class Rover
   end
 
   def turn(n)
-    puts @current_direction
-    case @current_direction
-    when "N"
-      if n == "L"
-        @current_direction = "W"
-      else
-        @current_direction = "E"
-      end
-    when "E"
-      if n == "L"
-        @current_direction = "N"
-      else
-        @current_direction = "S"
-      end
-    when "S"
-      if n == "L"
-        @current_direction = "E"
-      else
-        @current_direction = "W"
-      end
-    when "W"
-      if n == "L"
-        @current_direction = "S"
-      else
-        @current_direction = "N"
-      end
-
+    #magic spell
+    direction_spell = "WNESWN"
+    substring_index = direction_spell[1..-2].index(@current_direction)
+    if n == "L"
+      position = -1
+    else
+      position = 1
     end
+    @current_direction = direction_spell[substring_index+1+position]
 
   end
 
@@ -90,15 +72,3 @@ class Rover
   end
 
 end
-
-
-#
-# Taking It Further (optional)
-#
-# Try thinking about other object possibilities,
-# such as a MissionControl object that's responsible for reading and handing the instructions over to the rovers.
-# It could also be responsible for reporting their final states.
-#
-# Another possibility is a Plateau object.
-# This object could give you perspective of multiple rovers on a given board.
-# This could allow you to write methods to verify if the rovers are trying to move off the board or colliding with one another.
