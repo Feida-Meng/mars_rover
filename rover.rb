@@ -15,12 +15,12 @@ class Rover
     instructions = gets
     @current_x = instructions[0].to_i
     @current_y = instructions[1].to_i
-    @current_direction = instructions[2]
+    @current_direction = instructions[2].upcase
 
     puts "Please enter the moves."
-    @moves = gets
-    puts @moves.length
-    puts @moves[@moves.length]
+    @moves = gets.upcase
+    # puts @moves.length
+    # puts @moves[@moves.length]
 
     l = 0
     while l < @moves.length-1
@@ -55,16 +55,11 @@ class Rover
   end
 
   def turn(n)
-    #magic spell
     direction_spell = "WNESWN"
     substring_index = direction_spell[1..-2].index(@current_direction)
-    if n == "L"
-      position = -1
-    else
-      position = 1
-    end
-    @current_direction = direction_spell[substring_index+1+position]
-
+    position = 1
+    position = -1 if n == "L"
+    @current_direction = direction_spell[substring_index + 1 + position]
   end
 
   def future_position
