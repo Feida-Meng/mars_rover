@@ -7,23 +7,22 @@ class Rover
     @current_direction = String.new
     @moves = String.new
 
+
   end
 
   def read_instruction
     puts "Please enter the current position and direction,eg.11N."
     puts "1st number being the x-coordinate, 2nd number is the y-coordinate"
-    instructions = gets
+    instructions = gets.chomp
     @current_x = instructions[0].to_i
     @current_y = instructions[1].to_i
     @current_direction = instructions[2].upcase
 
     puts "Please enter the moves."
-    @moves = gets.upcase
-    # puts @moves.length
-    # puts @moves[@moves.length]
+    @moves = gets.chomp.upcase
 
     l = 0
-    while l < @moves.length-1
+    while l < @moves.length
 
       if @moves[l] != "M"
         turn(@moves[l])
@@ -32,7 +31,7 @@ class Rover
       end
 
     l +=1
-    puts l
+
     end
 
     return future_position
